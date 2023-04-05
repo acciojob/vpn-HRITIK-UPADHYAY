@@ -15,32 +15,21 @@ public class User {
     private String password;
     private String originalIp;
     private String maskedIp;
-
     private Boolean connected;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    Country country;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Connection> connectionList = new ArrayList<>();
+    private List<Connection> connectionList;
 
     @ManyToMany
     @JoinColumn
-    List<ServiceProvider> serviceProviderList = new ArrayList<>();
+    private List<ServiceProvider> serviceProviderList;
 
-    public User() {}
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Country originalCountry;
 
-    public User(int id, String username, String password, String originalIp, String maskedIp, Boolean connected, Country country, List<Connection> connectionList, List<ServiceProvider> serviceProviderList) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.originalIp = originalIp;
-        this.maskedIp = maskedIp;
-        this.connected = connected;
-        this.country = country;
-        this.connectionList = connectionList;
-        this.serviceProviderList = serviceProviderList;
+
+    public User() {
     }
+
 
     public int getId() {
         return id;
@@ -90,14 +79,6 @@ public class User {
         this.connected = connected;
     }
 
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
     public List<Connection> getConnectionList() {
         return connectionList;
     }
@@ -112,5 +93,13 @@ public class User {
 
     public void setServiceProviderList(List<ServiceProvider> serviceProviderList) {
         this.serviceProviderList = serviceProviderList;
+    }
+
+    public Country getOriginalCountry() {
+        return originalCountry;
+    }
+
+    public void setOriginalCountry(Country originalCountry) {
+        this.originalCountry = originalCountry;
     }
 }

@@ -9,28 +9,21 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Enumerated(EnumType.STRING)
     private CountryName countryName;
 
     private String code;
 
+
     @ManyToOne
     @JoinColumn
-    ServiceProvider serviceProvider;
+    private ServiceProvider serviceProvider;
+
 
     @OneToOne
-    @JoinColumn
-    User user;
+    private User user;
 
-    public Country() {}
-
-    public Country(int id, CountryName countryName, String code, ServiceProvider serviceProvider, User user) {
-        this.id = id;
-        this.countryName = countryName;
-        this.code = code;
-        this.serviceProvider = serviceProvider;
-        this.user = user;
+    public Country() {
     }
 
     public int getId() {
